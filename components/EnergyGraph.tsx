@@ -37,22 +37,22 @@ const EnergyGraph = ({ energyData }) => {
     series: [
       {
         name: "Voltage", // You can change the metric name here
-        data: energyData.map((entry) => parseInt(entry.voltage)),
+        data: energyData.map((entry) => parseFloat(entry.voltage)),
         // Add similar entries for other metrics (current, power, energy) if needed
       },
       {
         name: "Current", // You can change the metric name here
-        data: energyData.map((entry) => parseInt(entry.current)),
+        data: energyData.map((entry) => parseFloat(entry.current)),
         // Add similar entries for other metrics (current, power, energy) if needed
       },
       {
         name: "Power", // You can change the metric name here
-        data: energyData.map((entry) => parseInt(entry.power)),
+        data: energyData.map((entry) => parseFloat(entry.power)),
         // Add similar entries for other metrics (current, power, energy) if needed
       },
       {
         name: "Energy", // You can change the metric name here
-        data: energyData.map((entry) => parseInt(entry.energy)),
+        data: energyData.map((entry) => parseFloat(entry.energy)),
         // Add similar entries for other metrics (current, power, energy) if needed
       },
     ],
@@ -90,18 +90,13 @@ const EnergyGraph = ({ energyData }) => {
     series: [
       {
         name: "Current", // You can change the metric name here
-        data: energyData.map((entry) => parseInt(entry.current)),
-        // Add similar entries for other metrics (current, power, energy) if needed
-      },
-      {
-        name: "Energy", // You can change the metric name here
-        data: energyData.map((entry) => parseInt(entry.energy)),
+        data: energyData.map((entry) => parseFloat(entry.current)),
         // Add similar entries for other metrics (current, power, energy) if needed
       },
     ],
     options: {
       chart: {
-        height: 650,
+        height: 200,
         type: "line",
         zoom: {
           enabled: false,
@@ -114,7 +109,7 @@ const EnergyGraph = ({ energyData }) => {
         curve: "straight",
       },
       title: {
-        text: "Energy Data from esp32",
+        text: "Current Data from esp32",
         align: "left",
       },
       grid: {
@@ -126,12 +121,148 @@ const EnergyGraph = ({ energyData }) => {
       xaxis: {
         categories: energyData.map((entry) => formatIndianTime(entry.time)),
       },
+
+      // yaxis: {
+      //   min: 0, // Set the minimum value for the Y-axis
+      //   max: 2, // Set the maximum value for the Y-axis
+      // },
+    },
+  };
+
+  const chartData3 = {
+    series: [
+
+      {
+        name: "Energy", // You can change the metric name here
+        data: energyData.map((entry) => parseFloat(entry.energy)),
+        // Add similar entries for other metrics (current, power, energy) if needed
+      },
+    ],
+    options: {
+      chart: {
+        height: 200,
+        type: "line",
+        zoom: {
+          enabled: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: "straight",
+      },
+      title: {
+        text: "Units Data from esp32",
+        align: "left",
+      },
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"],
+          opacity: 0.5,
+        },
+      },
+      xaxis: {
+        categories: energyData.map((entry) => formatIndianTime(entry.time)),
+      },
+
+      // yaxis: {
+      //   min: 0, // Set the minimum value for the Y-axis
+      //   max: 2, // Set the maximum value for the Y-axis
+      // },
+    },
+  };
+
+  const chartData4 = {
+    series: [
+      {
+        name: "Power", // You can change the metric name here
+        data: energyData.map((entry) => parseFloat(entry.power)),
+        // Add similar entries for other metrics (current, power, energy) if needed
+      },
+     
+    ],
+    options: {
+      chart: {
+        height: 200,
+        type: "line",
+        zoom: {
+          enabled: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: "straight",
+      },
+      title: {
+        text: "Power Data from esp32",
+        align: "left",
+      },
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"],
+          opacity: 0.5,
+        },
+      },
+      xaxis: {
+        categories: energyData.map((entry) => formatIndianTime(entry.time)),
+      },
+
+      // yaxis: {
+      //   min: 0, // Set the minimum value for the Y-axis
+      //   max: 2, // Set the maximum value for the Y-axis
+      // },
+    },
+  };
+
+  const chartData5 = {
+    series: [
+      {
+        name: "Voltage", // You can change the metric name here
+        data: energyData.map((entry) => parseFloat(entry.voltage)),
+        // Add similar entries for other metrics (current, power, energy) if needed
+      },
+    ],
+    options: {
+      chart: {
+        height: 200,
+        type: "line",
+        zoom: {
+          enabled: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: "straight",
+      },
+      title: {
+        text: "Voltage Data from esp32",
+        align: "left",
+      },
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"],
+          opacity: 0.5,
+        },
+      },
+      xaxis: {
+        categories: energyData.map((entry) => formatIndianTime(entry.time)),
+      },
+
+      // yaxis: {
+      //   min: 0, // Set the minimum value for the Y-axis
+      //   max: 2, // Set the maximum value for the Y-axis
+      // },
     },
   };
   
 
   return (
-    <div id="chart" className="min-w-[60vw]">
+    <div id="chart" className="min-w-[60vw] dark:text-white">
       {isBrowser && (
         <div>
           <ReactApexChart
@@ -143,6 +274,27 @@ const EnergyGraph = ({ energyData }) => {
           <ReactApexChart
             options={chartData2.options}
             series={chartData2.series}
+            type="line"
+            height={350}
+          />
+
+          <ReactApexChart
+            options={chartData5.options}
+            series={chartData5.series}
+            type="line"
+            height={350}
+          />
+
+          <ReactApexChart
+            options={chartData4.options}
+            series={chartData4.series}
+            type="line"
+            height={350}
+          />
+
+          <ReactApexChart
+            options={chartData3.options}
+            series={chartData3.series}
             type="line"
             height={350}
           />

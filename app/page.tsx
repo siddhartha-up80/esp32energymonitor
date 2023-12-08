@@ -13,14 +13,14 @@ export default function Home() {
     return (
       <div
         style={backgroundImageStyle}
-        className="flex justify-center items-center flex-col"
+        className="flex justify-center items-center flex-col w-full mx-auto"
       >
-        <h1 style={{ color: "white", fontSize: "2.5rem" }}>
-          View Energy Dashboard
+        <h1>
+          <span className="text-center mx-auto text-white text-3xl mb-5">View Energy Dashboard</span>
         </h1>
 
-        <Button className="mt-2 bg-white rounded-sm shadow-md dark:bg-black">
-          <Link href="/monitor">View Monitor</Link>
+        <Button className="mt-5 bg-white rounded-sm shadow-md dark:bg-black">
+          <Link href="/monitor">View Dashboard</Link>
         </Button>
       </div>
     );
