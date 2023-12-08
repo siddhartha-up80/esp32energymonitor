@@ -41,7 +41,7 @@ export default function EnergyTable() {
         setIsLoading(true);
 
         const res = await fetch(
-          `http://localhost:3000/api/getdata?page=${page}&limit=${rowsPerPage}`,
+          `${process.env.NEXT_PUBLIC_HOST}/api/getdata?page=${page}&limit=${rowsPerPage}`,
           { signal }
         );
         const json = await res.json();

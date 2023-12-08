@@ -10,7 +10,7 @@ export default function Monitor() {
     // Fetch your energy data here
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/getdata");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getdata`);
         const json = await res.json();
         setEnergyData(json);
       } catch (error) {
