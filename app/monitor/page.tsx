@@ -1,14 +1,18 @@
+//@ts-nocheck
 "use client";
 
 import React, { useState, useEffect } from "react";
 import EnergyGraph from "@/components/EnergyGraph";
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
+import { Spinner } from "@nextui-org/react";
 
 export default function Monitor() {
   const [energyData, setEnergyData] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
 
   const [clear, setClear] = useState(false);
+  const [ailoading, setAiLoading] = useState(false);
 
   const clearHistory = async () => {
     try {
@@ -46,6 +50,51 @@ export default function Monitor() {
     }
   };
 
+
+  const generateAiResponse = async () => {
+
+    setSuggestions([]);
+    setAiLoading(true);
+
+    try {
+      // Extract the last 5 energy data entries
+      const lastFiveEntries = energyData.slice(-5);
+
+      // Prepare data for OpenAI API (adjust based on OpenAI API requirements)
+      // const inputData = lastFiveEntries.map((entry) => entry.power).join("\n");
+      const inputData = lastFiveEntries
+        .map((entry) => {
+          return `Voltage: ${entry.voltage}V, Current: ${entry.current}A, Power: ${entry.power}W, Energy: ${entry.energy}kWh`;
+        })
+        .join("\n");
+
+      // Make a request to OpenAI API (replace YOUR_OPENAI_API_ENDPOINT with the actual endpoint)
+      const openaiResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST}/api/gpt`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prompt: inputData,
+          }),
+        }
+      );
+
+      if (openaiResponse.ok) {
+        const suggestionsData = await openaiResponse.json();
+        setSuggestions(suggestionsData); // Update state with OpenAI suggestions
+        console.log(suggestionsData);
+        setAiLoading(false);
+      } else {
+        console.error("Failed to fetch suggestions from OpenAI");
+      }
+    } catch (error) {
+      console.error("Error generating AI response:", error);
+    }
+  };
+
   useEffect(() => {
     // Fetch data initially
     fetchData();
@@ -58,9 +107,9 @@ export default function Monitor() {
   }, []); // Empty dependency array ensures the effect runs only once during mount
 
   return (
-    <div className="md:p-10 p-2 md:flex md:justify-center md:items-center md:w-full mx-auto">
+    <div className="md:p-10 p-2 md:flex gap-x-8">
       <div className="">
-        <div className="text-2xl w-full flex flex-col mb-5">
+        <div className="text-2xl flex flex-col mb-5">
           <span className="text-center mx-auto">Energy Graph</span>
           <span className="flex justify-between w-full">
             <Link href="/history">
@@ -84,6 +133,27 @@ export default function Monitor() {
         </div>
         <div>
           <EnergyGraph energyData={energyData} />
+        </div>
+      </div>
+
+      <div className="justify-center mx-auto w-full flex">
+        <div>
+          <div className="text-2xl flex flex-col mb-5 ">
+            <span className="text-center mx-auto">AI Suggestions</span>
+            <span className="flex justify-center w-full">
+              <Button
+                className="mt-2 bg-white rounded-sm border shadow-md dark:bg-black"
+                onClick={generateAiResponse}
+              >
+                Generate AI Response
+              </Button>
+            </span>
+          </div>
+
+          <div className="text-lg font-semibold">
+            {/* <p>Suggestions:</p> */}
+            {ailoading ? <Spinner size="lg" /> : suggestions.completion}
+          </div>
         </div>
       </div>
     </div>
