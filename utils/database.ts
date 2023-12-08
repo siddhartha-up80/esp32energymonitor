@@ -11,7 +11,9 @@ export const connectToDB = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI || "");
+    await mongoose.connect(
+      "mongodb+srv://rebel:7017614925@cluster0.ihexdsa.mongodb.net/energymonitor?retryWrites=true&w=majority"
+    );
 
     isConnected = true;
 
