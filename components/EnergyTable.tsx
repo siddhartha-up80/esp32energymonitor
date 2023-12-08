@@ -41,7 +41,7 @@ export default function EnergyTable() {
         setIsLoading(true);
 
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_HOST}/api/getdata?page=${page}&limit=${rowsPerPage}`,
+          `${process.env.NEXT_PUBLIC_HOST}/api/getlatestdata?page=${page}&limit=${rowsPerPage}`,
           { signal }
         );
         const json = await res.json();
@@ -136,7 +136,7 @@ export default function EnergyTable() {
           showShadow
           color="secondary"
           page={page}
-          total={list.totalPages}
+          total={100}
           onChange={(newPage) => setPage(newPage)}
         />
       </div>
