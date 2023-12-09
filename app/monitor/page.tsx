@@ -118,18 +118,18 @@ export default function Monitor() {
               </Button>
             </Link>
 
-            <Button
+            {/* <Button
               className="mt-2 bg-white rounded-sm border shadow-md dark:bg-black"
               onClick={clearHistory}
             >
               Clear History
-            </Button>
+            </Button> */}
           </span>
-          {clear && (
+          {/* {clear && (
             <span className="text-xl flex justify-end mt-3 text-red-600">
               History Cleared!
             </span>
-          )}
+          )} */}
         </div>
         <div>
           <EnergyGraph energyData={energyData} />
