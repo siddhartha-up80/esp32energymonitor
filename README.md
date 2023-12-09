@@ -1,6 +1,6 @@
-# Next.js & NextUI Template
+# ESP32 Energy Monitor
 
-This is a template for creating applications using Next.js 13 (app directory) and NextUI (v2).
+This project is a web application for monitoring and visualizing energy data collected from ESP32 devices. It leverages Next.js for the frontend and various other technologies to create an efficient and user-friendly energy monitoring platform.
 
 ## Technologies Used
 
@@ -10,18 +10,17 @@ This is a template for creating applications using Next.js 13 (app directory) an
 - [Tailwind Variants](https://tailwind-variants.org)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+- [OpenAI API](https://beta.openai.com/docs/)
+- [MongoDB](https://www.mongodb.com/)
 
 ## How to Use
 
+### Use our project with your esp32 project
 
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
+To create a new project based on this project clone this repo by using`git clone`, run the following command:
 
 ```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
+git clone https://github.com/siddhartha-up80/esp32energymonitor
 
 ### Install dependencies
 
@@ -35,6 +34,16 @@ npm install
 npm run dev
 ```
 
-## License
+## ESP32 Integration
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+1. Connect your ESP32 and sensors to measure voltage, current, power, and energy.
+2. Configure your ESP32 to yuor depolyed link to send energy data to the web application via the Internet.
+
+## AI Suggestions
+
+Add OpenAI Key to your environment variables and explore AI-generated suggestions based on the last 5 entries of voltage, current, power, and energy data.
+
+## Clear History
+
+Clear all historical energy data stored in the database by clicking the "Clear History" button.
+
