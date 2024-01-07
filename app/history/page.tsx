@@ -10,30 +10,30 @@ const History = () => {
 
   const clearHistory = async () => {
 
-        alert("History Button is Disabled for now because of some random users")
-    // try {
-    //   const res = await fetch(
-    //     `${process.env.NEXT_PUBLIC_HOST}/api/clearhistory`,
-    //     {
-    //       method: "POST",
-    //     }
-    //   );
+        // alert("History Button is Disabled for now because of some random users")
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST}/api/clearhistory`,
+        {
+          method: "POST",
+        }
+      );
 
-    //   if (res.ok) {
-    //     console.log("History cleared successfully");
-    //     // Optionally, you can update the state or take other actions after successful deletion
-    //     setClear(true);
-    //     setTimeout(() => {
-    //       setClear(false);
-    //     }, 5000)
-    //   } else {
-    //     console.error("Failed to clear history");
-    //     // Handle the error (display a message or take other actions)
-    //   }
-    // } catch (error) {
-    //   console.error("Error clearing history:", error);
-    //   // Handle the error (display a message or take other actions)
-    // }
+      if (res.ok) {
+        console.log("History cleared successfully");
+        // Optionally, you can update the state or take other actions after successful deletion
+        setClear(true);
+        setTimeout(() => {
+          setClear(false);
+        }, 5000)
+      } else {
+        console.error("Failed to clear history");
+        // Handle the error (display a message or take other actions)
+      }
+    } catch (error) {
+      console.error("Error clearing history:", error);
+      // Handle the error (display a message or take other actions)
+    }
   };
 
   return (

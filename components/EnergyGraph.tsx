@@ -262,7 +262,7 @@ const EnergyGraph = ({ energyData }) => {
   
 
   return (
-    <div id="chart" className="min-w-[60vw] dark:text-white">
+    <div id="chart" className="min-w-[50vw] dark:text-white">
       {isBrowser && (
         <div>
           <ReactApexChart
