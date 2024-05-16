@@ -11,7 +11,7 @@ export default function Monitor() {
   const [energyData, setEnergyData] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [ailoading, setAiLoading] = useState(false);
-
+  
   const [ailive, setAilive] = useState(null);
   const [liveon, setLiveon] = useState(false);
 
@@ -19,16 +19,16 @@ export default function Monitor() {
 
   const [liveIntervalId, setLiveIntervalId] = useState(null);
 
-   const startLiveUpdates = () => {
-     setLiveIntervalId(setInterval(generateLive, 5000));
-     setLiveon(true);
-   };
+  const startLiveUpdates = () => {
+    setLiveIntervalId(setInterval(generateLive, 5000));
+    setLiveon(true);
+  };
 
-   const stopLiveUpdates = () => {
-     clearInterval(liveIntervalId);
-     setLiveIntervalId(null);
-     setLiveon(false);
-   };
+  const stopLiveUpdates = () => {
+    clearInterval(liveIntervalId);
+    setLiveIntervalId(null);
+    setLiveon(false);
+  };
 
   const clearHistory = async () => {
     try {
@@ -97,7 +97,7 @@ export default function Monitor() {
       // );
 
       const openaiResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_HOST}/api/gemini`,
+        `${process.env.NEXT_PUBLIC_HOST}/api/gpt`,
         {
           method: "POST",
           headers: {
@@ -124,13 +124,11 @@ export default function Monitor() {
 
   const generateLive = async () => {
     try {
-
-      await getLive()
-
+      await getLive();
     } catch (error) {
       console.error("Error generating AI response:", error);
     }
-  }
+  };
 
   const getLive = async () => {
     try {
@@ -260,7 +258,7 @@ export default function Monitor() {
 
             <div className="text-lg font-semibold">
               {/* <p>Suggestions:</p> */}
-              {ailoading ? <Spinner size="lg" /> : suggestions.completion}
+              {ailoading ? <Spinner size="lg" /> : suggestions.response}
             </div>
           </div>
         </div>

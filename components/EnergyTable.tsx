@@ -1,4 +1,4 @@
-//@ts-nocheck
+// @ts-nocheck
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -83,6 +83,7 @@ export default function EnergyTable() {
     list.reload(); // Refresh data when page changes
   }, [page]);
 
+  
   return (
     <>
       <Table
